@@ -11,6 +11,10 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 _moveVector;
     private float _fallVelocity = 0;
 
+
+    public bool doublejump;
+    public float jumpCount;
+
     private CharacterController _characterController;
 
     void Start()
@@ -45,10 +49,25 @@ public class PlayerMovement : MonoBehaviour
             _moveVector -= transform.right;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && _characterController.isGrounded)
-        {
-            _fallVelocity = -jumpForce;
+        
+        
+        if (Input.GetKeyDown(KeyCode.Space) && doublejump == true)
+        {               
+           _fallVelocity = -jumpForce;
+            jumpCount += 1;
         }
+        
+        if (jumpCount == 1)
+        {
+            doublejump = false;
+        }
+        
+
+        if (_characterController.isGrounded)
+        {
+            doublejump = true;
+            jumpCount = 0;
+        }    
     }
 
 }
