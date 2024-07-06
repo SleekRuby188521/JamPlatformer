@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private savedPosition lastSavedPosition;
     public float gravity = 9.8f;
     public float jumpForce;
     public float speed;
@@ -33,6 +34,13 @@ public class PlayerMovement : MonoBehaviour
         {
             _fallVelocity = 0;
         }
+        if (transform.position.y <= -10)
+        {
+           
+            transform.position = lastSavedPosition.position + Vector3.down * 0.7f;
+        }
+
+
     }
 
     void Update()
